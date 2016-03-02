@@ -1,5 +1,6 @@
 -module(todo_list).
--export([add_item/2, add_item/1, element_in_list/3, insert_item_at/3, take/2, take/3, drop/2, todo/1, todo/2]).
+-export([add_item/2, add_item/1, element_in_list/3, insert_item_at/3, take/2, take/3, 
+			drop/2, todo/1, todo/2, main/1]).
 
 add_item(Item) ->
 	 [Item].
@@ -15,7 +16,7 @@ element_in_list(Item, List, N) ->
 				element_in_list(Item, B, (N+1))
 	 end.
 
-insert_item_at([], List, _) -> List;
+insert_item_at([], List, _) -> [List];
 insert_item_at(I, [], _) -> [I];
 insert_item_at(Item, List, Pos) ->
 	 Nlist = drop(Pos-1, List),
@@ -24,7 +25,6 @@ insert_item_at(Item, List, Pos) ->
 
 take(N, List) ->
 	 take(N,List,[]).
-take(_, [], L) -> L;
 take(0, _, L) -> L;
 take(N, List, L) ->
 	 [A|B] = List,
@@ -41,3 +41,14 @@ todo(Item) ->
 
 todo(Item, List) ->
 	 lists:append(List, [Item]).
+
+main(List) ->
+	 Title = io:get_line("Please enter your Title for your Todo item: "),
+	 Desc = io:get_line("Please enter your Description for your Todo item: "),
+	 C = io:get_line("Enter another item?"),
+	 if
+		  C =:= "no\n" ->
+				lists:append(List, {Title, Desc, []});
+		  true ->
+				main(insert_item_at({Title, Desc, []}, List, []))
+	 end.	 
