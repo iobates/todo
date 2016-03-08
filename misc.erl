@@ -3,6 +3,9 @@
 
 nth(_, [I]) -> I;
 nth(_, []) -> [];
+nth(1, List) ->
+	 [A|_] = List,
+	 A;
 nth(2, List) -> 
 	 [_|B] = List,
 	 B;

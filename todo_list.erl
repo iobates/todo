@@ -1,7 +1,7 @@
 -module(todo_list).
 -import(misc, [nth/2]).
 -export([add_item/2, add_item/1, element_in_list/3, insert_item_at/3, take/2, take/3, 
-			drop/2, todo/1, todo/2, main/1, present/2]).
+			drop/2, todo/1, todo/2, main/1, present/1]).
 
 add_item(Item) ->
 	 [Item].
@@ -54,6 +54,6 @@ main(List) ->
 				main(insert_item_at({Title, Desc, []}, List, 1))
 	 end.	 
 
-present(Pos,List) ->
-	 misc:nth(Pos, List).
-	 
+present(Item) ->
+	 {Title, Desc, _} = Item,
+	 io:format("Title: ~p~nDescription:~n~p~n", [Title, Desc]).
