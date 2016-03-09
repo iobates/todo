@@ -52,17 +52,14 @@ main(List) ->
 	 C = io:get_line("Enter another item?"),
 	 if
 		  C =:= "no\n" ->
-				lists:append(List, {Title, Desc, []});
+				lists:append(List, make_item(Title, Desc));
 		  true ->
-				main(insert_item_at({Title, Desc, []}, List, 1))
+				main(insert_item_at(make_item(Title, Desc), List, 1))
 	 end.	 
 
 present(Item) ->
 	 {Title, Desc, _} = Item,
 	 io:format("Title: ~p~nDescription:~n~p~n", [Title, Desc]).
-
-first_item() ->
-	 #item{title="Chess video for youtube", description="Make a video for youtube about the Ruy Lopez variation 3.-Nge7"}.
 
 make_item(Title, Desc) ->
 	 #item{title = Title, description = Desc}.
