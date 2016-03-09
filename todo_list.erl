@@ -1,7 +1,10 @@
 -module(todo_list).
 -import(misc, [nth/2]).
 -export([add_item/2, add_item/1, element_in_list/3, insert_item_at/3, take/2, take/3, 
-			drop/2, todo/1, todo/2, main/1, present/1]).
+			drop/2, todo/1, todo/2, main/1, present/1, first_item/0]).
+
+-record(item, {title,
+				  description}).
 
 add_item(Item) ->
 	 [Item].
@@ -57,3 +60,9 @@ main(List) ->
 present(Item) ->
 	 {Title, Desc, _} = Item,
 	 io:format("Title: ~p~nDescription:~n~p~n", [Title, Desc]).
+
+first_item() ->
+	 #item{title="Chess video for youtube", description="Make a video for youtube about the Ruy Lopez variation 3.-Nge7"}.
+
+make_item(Title, Desc) ->
+	 #item{title = Title, description = Desc}.
